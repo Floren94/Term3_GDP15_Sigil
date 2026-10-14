@@ -1,17 +1,4 @@
 ﻿#include "Sigil_Lessons.h"
+#include "Modules/ModuleManager.h"
 
-#define LOCTEXT_NAMESPACE "FSigil_LessonsModule"
-
-void FSigil_LessonsModule::StartupModule()
-{
-    
-}
-
-void FSigil_LessonsModule::ShutdownModule()
-{
-    
-}
-
-#undef LOCTEXT_NAMESPACE
-    
-IMPLEMENT_MODULE(FSigil_LessonsModule, Sigil_Lessons)
+IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, Sigil_Lessons, "Sigil_Lessons")
