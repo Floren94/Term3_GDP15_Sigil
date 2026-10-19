@@ -10,3 +10,32 @@ USigilAbilitySystemComponent::USigilAbilitySystemComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 }
+
+void USigilAbilitySystemComponent::AbilityTagPressed(const FGameplayTag& InputTag)
+{
+	if (!InputTag.IsValid())
+		return;
+	
+	for (FGameplayAbilitySpec& AbilitySpec :  GetActivatableAbilities())
+	{
+		if (AbilitySpec.Ability && AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
+		{
+			AbilitySpecInputPressed(AbilitySpec);
+			TryActivateAbility(AbilitySpec.Handle);
+		}
+	}
+}
+
+void USigilAbilitySystemComponent::AbilityTagReleased(const FGameplayTag& InputTag)
+{
+	if (!InputTag.IsValid())
+	return;
+	
+	for (FGameplayAbilitySpec& AbilitySpec :  GetActivatableAbilities())
+	{
+		if (AbilitySpec.Ability && AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag))
+		{
+			AbilitySpecInputReleased(AbilitySpec);
+		}
+	}
+}

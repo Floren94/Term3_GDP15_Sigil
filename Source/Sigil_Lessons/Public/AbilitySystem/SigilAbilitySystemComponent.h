@@ -15,7 +15,7 @@ class SIGIL_LESSONS_API USigilAbilitySystemComponent : public UAbilitySystemComp
 public:
 	// Sets default values for this component's properties
 	USigilAbilitySystemComponent();
-
-
-public:
+	
+	void AbilityTagPressed(const FGameplayTag& InputTag);
+	void AbilityTagReleased(const FGameplayTag& InputTag);
 };
