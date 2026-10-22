@@ -39,7 +39,7 @@ public:
 	TArray<FSigilInputActionConfig> AbilityInputActions;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TArray<FSigilInputActionConfig> SigilINativeActions;
+	TArray<FSigilInputActionConfig> SigilNativeActions;
 	
 	TObjectPtr<UInputAction> GetInputActionByTag(const FGameplayTag& InInputTag) const;
 };

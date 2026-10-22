@@ -47,7 +47,7 @@ void ASigilPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	{
 		SigilInputComponent->BindNativeAction(InputConfig, SigilGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Move);
 		SigilInputComponent->BindNativeAction(InputConfig, SigilGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Look);
-		SigilInputComponent->BindAbilityAction(InputConfig, this, &ThisClass::AbilityInputPressed, &ThisClass::AbilityInputReleased);
+		//SigilInputComponent->BindAbilityAction(InputConfig, this, &ThisClass::AbilityInputPressed, &ThisClass::AbilityInputReleased);
 	}
 }
 
