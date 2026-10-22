@@ -8,6 +8,7 @@
 #include "GameFramework/Character.h"
 #include "SigilCharacterBase.generated.h"
 
+class USigilCharacterStartupData;
 class USigilAbilitySystemComponent;
 
 UCLASS()
@@ -27,8 +28,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category="Sigil|Character|AbilitySystem")
 	TObjectPtr<USigilAbilitySystemComponent> SigilAbilitySystemComponent;
 	
-	UPROPERTY(EditDefaultsOnly, Category="Sigil|Character|AbilitySystem|Abilities")
-	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category="Sigil|StartUpData")
+	TSoftObjectPtr<USigilCharacterStartupData> StartUpData;
 	
-	void GiveDefaultAbilities() const;
+	void GiveStartingAbilities() const;
 };

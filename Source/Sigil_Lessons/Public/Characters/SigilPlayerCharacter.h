@@ -6,6 +6,7 @@
 #include "SigilCharacterBase.h"
 #include "SigilPlayerCharacter.generated.h"
 
+class USigilInputConfig;
 struct FInputActionValue;
 class UInputAction;
 class UInputMappingContext;
@@ -27,26 +28,16 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Sigil|Character", meta=(AllowPrivateAccess="true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
-
-	UPROPERTY(EditDefaultsOnly, Category="Sigil|Character|Input", meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 	
-	UPROPERTY(EditDefaultsOnly, Category="Sigil|Character|Input", meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputAction> MoveAction;
-	
-	UPROPERTY(EditDefaultsOnly, Category="Sigil|Character|Input", meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputAction> LookAction;
-	
-	UPROPERTY(EditDefaultsOnly, Category="Sigil|Character|Input", meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputAction> JumpAction;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Sigil|Character|Input", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USigilInputConfig> InputConfig;
 	
 public:
-	UFUNCTION()
-	void HandleControllerChanged(APawn* Pawn, AController* OldController, AController* NewController);
-	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	void AbilityInputPressed(const FGameplayTag& InputTag);
+	void AbilityInputReleased(const FGameplayTag& InputTag);
 };

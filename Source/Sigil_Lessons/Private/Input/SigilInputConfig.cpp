@@ -5,7 +5,7 @@
 
 TObjectPtr<UInputAction> USigilInputConfig::GetInputActionByTag(const FGameplayTag& InInputTag) const
 {
-	for (const FSigilInputActionConfig& InputConfig : SigilInputActions)
+	for (const FSigilInputActionConfig& InputConfig : AbilityInputActions)
 	{
 		if (InputConfig.InputTag == InInputTag && IsValid(InputConfig.InputAction))
 		{

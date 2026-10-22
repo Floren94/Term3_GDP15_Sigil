@@ -36,7 +36,7 @@ public:
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TArray<FSigilInputActionConfig> SigilInputActions;
+	TArray<FSigilInputActionConfig> AbilityInputActions;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<FSigilInputActionConfig> SigilINativeActions;

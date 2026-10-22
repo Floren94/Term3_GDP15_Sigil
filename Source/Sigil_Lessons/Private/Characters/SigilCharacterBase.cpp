@@ -1,6 +1,7 @@
 ﻿#include "Characters/SigilCharacterBase.h"
 
 #include "AbilitySystem/SigilAbilitySystemComponent.h"
+#include "Characters/Data/SigilCharacterStartupData.h"
 
 
 // Sets default values
@@ -21,13 +22,13 @@ UAbilitySystemComponent* ASigilCharacterBase::GetAbilitySystemComponent() const
 	return SigilAbilitySystemComponent.Get();
 }
 
-void ASigilCharacterBase::GiveDefaultAbilities() const
+void ASigilCharacterBase::GiveStartingAbilities() const
 {
-	check(SigilAbilitySystemComponent);
-	for (TSubclassOf<UGameplayAbility> Ability : DefaultAbilities)
-	{
-		const FGameplayAbilitySpec AbilitySpec(Ability,1);
-		SigilAbilitySystemComponent->GiveAbility(AbilitySpec);
-	}
+	if (StartUpData.IsValid())
+		return;
+	
+	if (USigilCharacterStartupData* LoadedStartupData = StartUpData.LoadSynchronous())
+		LoadedStartupData->GiveAbilitiesToComponent(SigilAbilitySystemComponent);
 }
+
 
