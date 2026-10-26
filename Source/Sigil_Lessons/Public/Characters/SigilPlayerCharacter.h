@@ -38,6 +38,6 @@ public:
 	
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
-	void AbilityInputPressed(const FGameplayTag& InputTag);
-	void AbilityInputReleased(const FGameplayTag& InputTag);
+	void AbilityInputPressed(const FGameplayTag InputTag);
+	void AbilityInputReleased(const FGameplayTag InputTag);
 };

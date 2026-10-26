@@ -38,11 +38,11 @@ void USigilInputComponent::BindAbilityAction(const USigilInputConfig* InInputCon
 	for (const FSigilInputActionConfig& ActionConfig : InInputConfig->AbilityInputActions)
 	{
 		if (ActionConfig.InputAction && ActionConfig.InputTag.IsValid())
-		{/*
+		{
 			if (Pressed)
 				BindAction(ActionConfig.InputAction, ActionConfig.TriggerEvent, Object, Pressed, ActionConfig.InputTag);
 			if (Released)
-				BindAction(ActionConfig.InputAction, ETriggerEvent::Completed, Object, Released, ActionConfig.InputTag);*/
+				BindAction(ActionConfig.InputAction, ETriggerEvent::Completed, Object, Released, ActionConfig.InputTag);
 		}
 	}
 }
