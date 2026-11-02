@@ -8,6 +8,7 @@
 #include "GameFramework/Character.h"
 #include "SigilCharacterBase.generated.h"
 
+class USigilItemAbilityComp;
 class USigilCharacterStartupData;
 class USigilAbilitySystemComponent;
 
@@ -24,9 +25,15 @@ public:
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Sigil|Item|Abilities")
+	USigilItemAbilityComp* GetItemAbilityComp() {return SigilItemAbilityComp;}
+	
 protected:
 	UPROPERTY(VisibleAnywhere, Category="Sigil|Character|AbilitySystem")
 	TObjectPtr<USigilAbilitySystemComponent> SigilAbilitySystemComponent;
+	
+	UPROPERTY(VisibleAnywhere, Category="Sigil|Character|AbilitySystem")
+	TObjectPtr<USigilItemAbilityComp> SigilItemAbilityComp;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category="Sigil|StartUpData")
 	TSoftObjectPtr<USigilCharacterStartupData> StartUpData;

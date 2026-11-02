@@ -5,12 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
 #include "UObject/Object.h"
+#include "AbilitySystem/SigilGameplayAbility.h"
 #include "SigilInputAbilityData.generated.h"
 
-class USigilGameplayAbility;
-/**
- * 
- */
 USTRUCT(BlueprintType)
 struct FInputAbilitySet
 {

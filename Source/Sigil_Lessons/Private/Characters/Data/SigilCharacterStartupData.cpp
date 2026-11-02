@@ -4,6 +4,7 @@
 #include "Characters/Data/SigilCharacterStartupData.h"
 
 #include "AbilitySystem/SigilAbilitySystemComponent.h"
+#include "Items/Component/SigilItemAbilityComp.h"
 
 void USigilCharacterStartupData::GiveAbilitiesToComponent(USigilAbilitySystemComponent* InSigilAbilityComp,
                                                           int32 InLevel)
@@ -12,8 +13,14 @@ void USigilCharacterStartupData::GiveAbilitiesToComponent(USigilAbilitySystemCom
 	GiveAbilities(StartUpAbilities, InSigilAbilityComp, InLevel);
 }
 
+void USigilCharacterStartupData::GiveStartingItems(USigilItemAbilityComp* InSigilItemComp)
+{
+	check(InSigilItemComp)
+	CreateItemInstances(StartingItems, InSigilItemComp);
+}
+
 void USigilCharacterStartupData::GiveAbilities(TArray<TSubclassOf<USigilGameplayAbility>>& AbilitiesToGive,
-	USigilAbilitySystemComponent* InSigilAbilityComponent, int32 ApplyLevel)
+                                               USigilAbilitySystemComponent* InSigilAbilityComponent, int32 ApplyLevel)
 {
 	if (AbilitiesToGive.IsEmpty())
 		return;
@@ -24,5 +31,16 @@ void USigilCharacterStartupData::GiveAbilities(TArray<TSubclassOf<USigilGameplay
 			continue;
 		
 		InSigilAbilityComponent->GiveAbility(FGameplayAbilitySpec(Ability, ApplyLevel, INDEX_NONE, InSigilAbilityComponent->GetOwner()));
+	}
+}
+
+void USigilCharacterStartupData::CreateItemInstances(TArray<TObjectPtr<USigilItemSpecBase>>& InStartingItems,
+	USigilItemAbilityComp* InSigilItemAbilityComp)
+{
+	if (InStartingItems.IsEmpty()) return;
+	
+	for (const TObjectPtr<USigilItemSpecBase>& Item : InStartingItems)
+	{
+		InSigilItemAbilityComp->CreateItemInstance(Item);
 	}
 }
