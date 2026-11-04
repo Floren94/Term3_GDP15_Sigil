@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/SigilAbilitySystemComponent.h"
 #include "Characters/Data/SigilCharacterStartupData.h"
+#include "Items/Component/SigilItemAbilityComp.h"
 
 
 // Sets default values
@@ -10,6 +11,7 @@ ASigilCharacterBase::ASigilCharacterBase()
 	PrimaryActorTick.bCanEverTick = false;
 	
 	SigilAbilitySystemComponent =CreateDefaultSubobject<USigilAbilitySystemComponent>("SigilAbilitySystemComponent");
+	SigilItemAbilityComp =CreateDefaultSubobject<USigilItemAbilityComp>("SigilItemAbilityComponent");
 }
 
 void ASigilCharacterBase::BeginPlay()
@@ -33,7 +35,10 @@ void ASigilCharacterBase::GiveStartingAbilities() const
 	}
 	
 	if (USigilCharacterStartupData* LoadedStartupData = StartUpData.LoadSynchronous())
+	{
 		LoadedStartupData->GiveAbilitiesToComponent(SigilAbilitySystemComponent);
+		LoadedStartupData->GiveStartingItems(SigilItemAbilityComp);
+	}
 }
 
 

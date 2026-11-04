@@ -8,6 +8,7 @@
 #include "SigilItemAbilityComp.generated.h"
 
 
+class USigilSpawnedItemInstance;
 class USigilItemSpecBase;
 class USigilItemInstanceBase;
 class UEnhancedInputLocalPlayerSubsystem;
@@ -26,8 +27,16 @@ public:
 	void CreateItemInstance(USigilItemSpecBase* InItemSpec);
 	
 	UFUNCTION(BlueprintCallable)
+	void EquipItem(const FGameplayTag InItemTag);
+	
+	UFUNCTION(BlueprintCallable)
+	void UnequipItem();
+	
+	UFUNCTION(BlueprintCallable)
 	USigilItemInstanceBase* GetItemInstance(const FGameplayTag InItemTag) const;
 	
+	UFUNCTION(BlueprintCallable)
+	USigilSpawnedItemInstance* GetActiveItem () const { return CurrentActiveItem; }
 	
 protected:
 	// Called when the game starts
@@ -41,6 +50,9 @@ protected:
 	
 	UPROPERTY()
 	TObjectPtr<UEnhancedInputLocalPlayerSubsystem> InputSubsystem;
+	
+	UPROPERTY()
+	TObjectPtr<USigilSpawnedItemInstance> CurrentActiveItem;
 	
 	UPROPERTY()
 	TMap<FGameplayTag, TObjectPtr<USigilItemInstanceBase>> CurrentItemMap;

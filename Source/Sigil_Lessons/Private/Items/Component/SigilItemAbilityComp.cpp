@@ -7,7 +7,9 @@
 #include "AbilitySystem/SigilAbilitySystemComponent.h"
 #include "Characters/SigilCharacterBase.h"
 #include "Items/InstanceObjects/SigilItemInstanceBase.h"
+#include "Items/InstanceObjects/SigilSpawnedItemInstance.h"
 #include "Items/Spec/SigilItemSpecBase.h"
+#include "Items/Spec/SigilSpawnedItemSpec.h"
 
 
 USigilItemAbilityComp::USigilItemAbilityComp()
@@ -21,8 +23,38 @@ void USigilItemAbilityComp::CreateItemInstance(USigilItemSpecBase* InItemSpec)
 	
 	USigilItemInstanceBase* Instance = InItemSpec->CreateItemInstance(this);
 	Instance->Initialize(InItemSpec, SigilAbilitySystemComponent);
+	
+	if (USigilSpawnedItemInstance* SpawnedItemInstance = Cast<USigilSpawnedItemInstance>(Instance))
+	{
+		SpawnedItemInstance->SpawnAndAttachItem(GetOwner());
+	}
+	
 	Instance->GrantAbilities();
 	CurrentItemMap.Add(InItemSpec->ItemTag, Instance);
+}
+
+void USigilItemAbilityComp::EquipItem(const FGameplayTag InItemTag)
+{
+	if (IsValid(CurrentActiveItem))
+		UnequipItem();
+	
+	USigilSpawnedItemInstance* ItemToEquip = Cast<USigilSpawnedItemInstance>(CurrentItemMap.Find(InItemTag)->Get());
+	ItemToEquip->SpawnedItemActor->AttachToComponent(OwnerSkeletalMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, 
+		ItemToEquip->SpawnedItemSpec->ActiveSocket);
+	CurrentActiveItem = ItemToEquip;
+	CurrentActiveItem->GrantEquipAbility();
+	SigilAbilitySystemComponent->AddLooseGameplayTag(CurrentActiveItem->SpawnedItemSpec->ItemTag);
+}
+
+void USigilItemAbilityComp::UnequipItem()
+{
+	if (!IsValid(CurrentActiveItem)) return;
+	
+	CurrentActiveItem->SpawnedItemActor->AttachToComponent(OwnerSkeletalMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, 
+		CurrentActiveItem->SpawnedItemSpec->PassiveSocket);
+	CurrentActiveItem->RemoveEquipAbility();
+	SigilAbilitySystemComponent->RemoveLooseGameplayTag(CurrentActiveItem->SpawnedItemSpec->ItemTag);
+	CurrentActiveItem = nullptr;
 }
 
 USigilItemInstanceBase* USigilItemAbilityComp::GetItemInstance(const FGameplayTag InItemTag) const
