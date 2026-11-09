@@ -43,6 +43,7 @@ void USigilItemAbilityComp::EquipItem(const FGameplayTag InItemTag)
 		ItemToEquip->SpawnedItemSpec->ActiveSocket);
 	CurrentActiveItem = ItemToEquip;
 	CurrentActiveItem->GrantEquipAbility();
+	InputSubsystem->AddMappingContext(CurrentActiveItem->SpawnedItemSpec->InputMappingContext, 1);
 	SigilAbilitySystemComponent->AddLooseGameplayTag(CurrentActiveItem->SpawnedItemSpec->ItemTag);
 }
 
@@ -53,6 +54,7 @@ void USigilItemAbilityComp::UnequipItem()
 	CurrentActiveItem->SpawnedItemActor->AttachToComponent(OwnerSkeletalMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, 
 		CurrentActiveItem->SpawnedItemSpec->PassiveSocket);
 	CurrentActiveItem->RemoveEquipAbility();
+	InputSubsystem->RemoveMappingContext(CurrentActiveItem->SpawnedItemSpec->InputMappingContext);
 	SigilAbilitySystemComponent->RemoveLooseGameplayTag(CurrentActiveItem->SpawnedItemSpec->ItemTag);
 	CurrentActiveItem = nullptr;
 }

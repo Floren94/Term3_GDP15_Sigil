@@ -8,4 +8,6 @@ namespace SigilGameplayTags{
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Jump_Start);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Jump_End);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Equip);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Attack);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Sprint);
 }
