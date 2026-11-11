@@ -20,11 +20,14 @@ void USigilSpawnedItemInstance::GrantEquipAbility()
 {
 	if (!OwningASC || !SpawnedItemSpec) return;
 	
-	if (SpawnedItemSpec->EquipAbility.IsValid())
+	for (const FInputAbilitySet AbilitySet: SpawnedItemSpec->EquipAbilities)
 	{
-		FGameplayAbilitySpec Spec(SpawnedItemSpec->EquipAbility.Ability, 1, INDEX_NONE, OwningASC->GetOwner());
-		Spec.GetDynamicSpecSourceTags().AddTag(SpawnedItemSpec->EquipAbility.InputTag);
-		EquipItemAbilitySpecHandle = OwningASC->GiveAbility(Spec);
+		if (AbilitySet.IsValid())
+		{
+			FGameplayAbilitySpec Spec(AbilitySet.Ability, 1, INDEX_NONE, OwningASC->GetOwner());
+			Spec.GetDynamicSpecSourceTags().AddTag(AbilitySet.InputTag);
+			EquipItemAbilitySpecHandles.Add(OwningASC->GiveAbility(Spec));
+		}
 	}
 }
 
@@ -32,12 +35,12 @@ void USigilSpawnedItemInstance::RemoveEquipAbility()
 {
 	if (!OwningASC) return;
 	
-	if (EquipItemAbilitySpecHandle.IsValid())
+	for (const FGameplayAbilitySpecHandle& ItemAbilityHandle: ItemAbilitySpecHandles)
 	{
-		OwningASC->ClearAbility(EquipItemAbilitySpecHandle);
+		if (ItemAbilityHandle.IsValid())
+			OwningASC->ClearAbility(ItemAbilityHandle);
 	}
-	
-	EquipItemAbilitySpecHandle = FGameplayAbilitySpecHandle();
+	ItemAbilitySpecHandles.Empty();
 }
 
 void USigilSpawnedItemInstance::SpawnAndAttachItem(AActor* InOwner)

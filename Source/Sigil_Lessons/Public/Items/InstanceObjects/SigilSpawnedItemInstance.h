@@ -17,7 +17,7 @@ public:
 	TObjectPtr<USigilSpawnedItemSpec> SpawnedItemSpec;
 	
 	UPROPERTY()
-	FGameplayAbilitySpecHandle EquipItemAbilitySpecHandle;
+	TArray<FGameplayAbilitySpecHandle> EquipItemAbilitySpecHandles;
 	
 	UPROPERTY()
 	TObjectPtr<AActor> SpawnedItemActor = nullptr;

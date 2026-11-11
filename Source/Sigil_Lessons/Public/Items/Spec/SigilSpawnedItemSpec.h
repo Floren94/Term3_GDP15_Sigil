@@ -18,7 +18,7 @@ public:
 	TSoftClassPtr<ASigilItemBase> ItemClass;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Equip")
-	FInputAbilitySet EquipAbility;
+	TArray<FInputAbilitySet> EquipAbilities;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Equip")
 	FName PassiveSocket;
