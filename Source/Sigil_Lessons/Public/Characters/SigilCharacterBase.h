@@ -8,6 +8,7 @@
 #include "GameFramework/Character.h"
 #include "SigilCharacterBase.generated.h"
 
+class USigilHealthAttributeSet;
 class USigilItemAbilityComp;
 class USigilCharacterStartupData;
 class USigilAbilitySystemComponent;
@@ -29,11 +30,14 @@ public:
 	USigilItemAbilityComp* GetItemAbilityComp() {return SigilItemAbilityComp;}
 	
 protected:
-	UPROPERTY(VisibleAnywhere, Category="Sigil|Character|AbilitySystem")
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category="Sigil|Character|AbilitySystem")
 	TObjectPtr<USigilAbilitySystemComponent> SigilAbilitySystemComponent;
 	
 	UPROPERTY(VisibleAnywhere, Category="Sigil|Character|AbilitySystem")
 	TObjectPtr<USigilItemAbilityComp> SigilItemAbilityComp;
+	
+	UPROPERTY()
+	TObjectPtr<USigilHealthAttributeSet> HealthAttributeSet;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category="Sigil|StartUpData")
 	TSoftObjectPtr<USigilCharacterStartupData> StartUpData;

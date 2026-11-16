@@ -11,6 +11,8 @@ namespace SigilGameplayTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_BlockMontage);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Cooldown_Attack);
 	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Status_Damage);
+	
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Event_Equipped);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Event_Attack);
 }

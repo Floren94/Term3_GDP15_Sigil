@@ -7,5 +7,7 @@ UE_DEFINE_GAMEPLAY_TAG(SigilGameplayTags::Ability_Sprint, "Ability.Sprint")
 UE_DEFINE_GAMEPLAY_TAG(SigilGameplayTags::Ability_BlockMontage, "Ability.BlockMontage")
 UE_DEFINE_GAMEPLAY_TAG(SigilGameplayTags::Ability_Cooldown_Attack, "Ability.Cooldown.Attack")
 
+UE_DEFINE_GAMEPLAY_TAG(SigilGameplayTags::Status_Damage, "Status.Damage")
+
 UE_DEFINE_GAMEPLAY_TAG(SigilGameplayTags::Ability_Event_Equipped, "Ability.Event.Equipped")
 UE_DEFINE_GAMEPLAY_TAG(SigilGameplayTags::Ability_Event_Attack, "Ability.Event.Attack")

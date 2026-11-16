@@ -1,6 +1,7 @@
 ﻿#include "Characters/SigilCharacterBase.h"
 
 #include "AbilitySystem/SigilAbilitySystemComponent.h"
+#include "AbilitySystem/Attributes/SigilHealthAttributeSet.h"
 #include "Characters/Data/SigilCharacterStartupData.h"
 #include "Items/Component/SigilItemAbilityComp.h"
 
@@ -12,6 +13,8 @@ ASigilCharacterBase::ASigilCharacterBase()
 	
 	SigilAbilitySystemComponent =CreateDefaultSubobject<USigilAbilitySystemComponent>("SigilAbilitySystemComponent");
 	SigilItemAbilityComp =CreateDefaultSubobject<USigilItemAbilityComp>("SigilItemAbilityComponent");
+	
+	HealthAttributeSet = CreateDefaultSubobject<USigilHealthAttributeSet>("HealthAttributeSet");
 }
 
 void ASigilCharacterBase::BeginPlay()
